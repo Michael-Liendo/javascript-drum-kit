@@ -7,6 +7,14 @@ function Button({ instrument }) {
     audio.play();
   }
 
+  document.addEventListener('keydown', (event) => {
+    let name = event.key;
+
+    if (name.toLocaleUpperCase() === instrument.key) {
+      play();
+    }
+  });
+
   return (
     <>
       <button
