@@ -6,7 +6,6 @@ function Button({ instrument }) {
     let audio = document.getElementById(instrument.key);
     audio.play();
   }
-  addEventListener;
 
   return (
     <>
