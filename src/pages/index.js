@@ -2,18 +2,20 @@ import Head from 'next/head';
 import drumPad from '../utils/drumPads.json';
 
 function Button({ instrument }) {
+  if (typeof window !== 'undefined') {
+    document.addEventListener('keydown', (event) => {
+      let name = event.key;
+
+      if (name.toLocaleUpperCase() === instrument.key) {
+        play();
+      }
+    });
+  }
+
   function play() {
     let audio = document.getElementById(instrument.key);
     audio.play();
   }
-
-  document.addEventListener('keydown', (event) => {
-    let name = event.key;
-
-    if (name.toLocaleUpperCase() === instrument.key) {
-      play();
-    }
-  });
 
   return (
     <>
@@ -34,7 +36,7 @@ export default function Home() {
       <Head>
         <title>Drum Kit Machine </title>
       </Head>
-      <h1 className="m-8 text-center text-4xl">Drum Kit Machine</h1>
+      <h1 className="m-8 text-white text-5xl text-center">Drum Kit Machine</h1>
       <div className="grid   grid-cols-3 lg:gap-4 lg:mx-48 content-center">
         {drumPad.map((instrument) => (
           <Button key={instrument.key} instrument={instrument} />
